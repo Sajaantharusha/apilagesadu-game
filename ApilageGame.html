@@ -1,26 +1,50 @@
 <!DOCTYPE html>
 <html>
-    <head><title>ApilageGame</title>
-    <link rel="website icon" type="icon"
-    href="icon.png">
+
+<head>
+    <title>ApilageGame</title>
+    <link rel="website icon" type="icon" href="icon.png">
 
     <link rel="stylesheet" href="style.css" />
-    </head>
+</head>
 
-    <body class="background" id="background" onkeyup="controller(event);">
+<body class="background" id="background" onkeyup="controller(event);">
+    <audio controls id="audio" style="display: none;" loop>
+        <source src="background.mp3">
+    </audio>
+<!-- jump -->
+    <!-- <audio controls id="jump" style="display: none;" loop>
+        <source src="jump_sdf.mp3">
+    </audio> -->
+
+    <!-- run -->
+    <!-- <audio controls id="run" style="display: none;" loop>
+        <source src="run.mp3">
+    </audio> -->
+
+     <!-- apilagesadu -->
+    <!-- <audio controls id="run" style="display: none;" loop>
+        <source src="run.mp3">
+    </audio> -->
+    
 
 
 
-        <div class="score" id="score">0</div>
 
-        
-        <div class="image-container">
-            <img src="gameicon.png" class="gameicon" id="gameicon" alt="Game Icon" />
-          </div>
+    <div class="score" id="score">0</div>
 
-        <img src="run1.png" class="apilagesadu" id="apilagesadu"/>
-        <script src="apilagescript.js"></script>
-    </body>
+
+    <div class="image-container">
+        <img src="gameicon.png" class="gameicon" id="gameicon" alt="Game Icon">
+    </div>
+
+    <img class="trap" src="traps.png" alt="trap">
+    <img src="run1.png" alt="apilagesadu" class="apilagesadu" id="apilagesadu" />
+    
+    
+    <script src="actions.js"></script>
+    <script src="apilagescript.js"></script>
+</body>
 
 
 </html>

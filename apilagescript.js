@@ -1,43 +1,71 @@
+var isJumping = false;
+var isRunning = false;
+var gameCharacter = document.getElementById("apilagesadu")
+
 function controller(event) {
+
     if (event.key == "Enter") {
-        if (runWorkerNumber == 0) {
-            run();
-        }
+        run();
+        document.getElementById("audio").play()
     }
 
 
     if (event.key == " ") {
-        if (jumpImageNumber == 0) {
-            if (runWorkerNumber != 0) {
-                clearInterval(runWorkerNumber);
-                jump();
-            }
-        }
+        jump();
     }
-
 }
-
-var runImageNumber = 1;
-var runWorkerNumber = 0;
-// var runSound = new Audio("run.mp3")
-// runSound.loop = true;
 
 
 
 
 function run() {
+    if (isRunning) return;
+
+    let runImageNumber = 1;
+
+    setInterval(() => {
+        // if (isJumping) return;
+
+        runImageNumber = runImageNumber + 1;
+
+        if (runImageNumber == 6) {
+            runImageNumber = 1;
+        }
+
+        document.getElementById("apilagesadu").src = "run" + runImageNumber + ".png";
+
+        moveBackground();
+        moveBoxes();
+    }, 150);
 }
 
-runWorkerNumber = setInterval(() => {
 
 
-    runImageNumber = runImageNumber + 1;
+var jumpImageNumber = 1;
+function jump() {
+    isJumping = true;
+    let jumpInterval = 0;
+    jumpInterval = setInterval(() => {
 
-    if (runImageNumber == 6) {
-        runImageNumber = 1;
+        jumpImageNumber = jumpImageNumber + 1;
 
-    }
-    document.getElementById("apilagesadu").src = "run" + runImageNumber + ".png";
+        gameCharacterMarginTop = parseInt(window.getComputedStyle(gameCharacter, null).marginTop);
 
-}, 150);
-          
+        //increase image margin top and decrease it to make it look like jumping
+        const steps = 70;
+        if (jumpImageNumber > 1 && jumpImageNumber <= 4) {
+            gameCharacter.style.marginTop = parseInt(gameCharacterMarginTop - steps) + "px";
+        } else {
+            gameCharacter.style.marginTop = parseInt(gameCharacterMarginTop + steps) + "px";
+        }
+        
+
+        if (jumpImageNumber == 7) {
+            jumpImageNumber = 1;
+            clearInterval(jumpInterval);
+            isJumping = false;
+        }
+
+        gameCharacter.src = "jump" + jumpImageNumber + ".png";
+    }, 150);
+}
