@@ -5,6 +5,16 @@ function controller(event) {
         }
     }
 
+
+    if (event.key == " ") {
+        if (jumpImageNumber == 0) {
+            if (runWorkerNumber != 0) {
+                clearInterval(runWorkerNumber);
+                jump();
+            }
+        }
+    }
+
 }
 
 var runImageNumber = 1;
@@ -30,4 +40,4 @@ runWorkerNumber = setInterval(() => {
     document.getElementById("apilagesadu").src = "run" + runImageNumber + ".png";
 
 }, 150);
-
+          
