@@ -1,12 +1,15 @@
 var isJumping = false;
 var isRunning = false;
 var gameCharacter = document.getElementById("apilagesadu")
+let obstacles = document.getElementsByClassName('obstacle');
+let boxes = document.getElementsByClassName('box');
+let ganjas = document.getElementsByClassName('ganja');
 
 function controller(event) {
 
     if (event.key == "Enter") {
         run();
-        document.getElementById("audio").play()
+        backgroundMusic();
     }
 
 
@@ -19,12 +22,20 @@ function controller(event) {
 
 
 function run() {
-    if (isRunning) return;
+    if (isRunning) {
+        return;
+    } else {
+        isRunning = true;
+    }
 
     let runImageNumber = 1;
 
     setInterval(() => {
-        // if (isJumping) return;
+        moveBackground();
+        moveObstacles();
+        checkCollision();
+
+        if (isJumping) return;
 
         runImageNumber = runImageNumber + 1;
 
@@ -33,30 +44,30 @@ function run() {
         }
 
         document.getElementById("apilagesadu").src = "run" + runImageNumber + ".png";
-
-        moveBackground();
-        moveBoxes();
     }, 150);
 }
 
 
 
-var jumpImageNumber = 1;
 function jump() {
-    isJumping = true;
+
+    let jumpImageNumber = 1;
     let jumpInterval = 0;
+
+    isJumping = true;
+
     jumpInterval = setInterval(() => {
 
         jumpImageNumber = jumpImageNumber + 1;
 
-        gameCharacterMarginTop = parseInt(window.getComputedStyle(gameCharacter, null).marginTop);
+        gameCharacterBottom = parseInt(window.getComputedStyle(gameCharacter, null).bottom);
 
         //increase image margin top and decrease it to make it look like jumping
         const steps = 70;
         if (jumpImageNumber > 1 && jumpImageNumber <= 4) {
-            gameCharacter.style.marginTop = parseInt(gameCharacterMarginTop - steps) + "px";
+            gameCharacter.style.bottom = parseInt(gameCharacterBottom + steps) + "px";
         } else {
-            gameCharacter.style.marginTop = parseInt(gameCharacterMarginTop + steps) + "px";
+            gameCharacter.style.bottom = parseInt(gameCharacterBottom - steps) + "px";
         }
         
 

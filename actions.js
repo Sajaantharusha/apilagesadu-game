@@ -8,19 +8,38 @@ function moveBackground() {
         };
 
     // increase the background position
-    positions.left = parseInt(positions.left) - 10;
+    positions.left = parseInt(positions.left) - getMovingSpeed();
     background.style.backgroundPosition = positions.left + "px " + positions.top;
 }
 
-function moveBoxes() {
-    let boxes = document.getElementsByClassName('trap');
-    for (let i = 0; i < boxes.length; i++) {
-        let box = boxes[i];
-        let left = parseInt(window.getComputedStyle(box, null).left);
+function moveObstacles() {
+    for (let i = 0; i < obstacles.length; i++) {
+        let obstacle = obstacles[i];
+        let left = parseInt(window.getComputedStyle(obstacle, null).left);
         if (left < -100) {
-            box.style.left = "100%";
+            obstacle.style.left = "100%";
         } else {
-            box.style.left = left - 10 + "px";
+            obstacle.style.left = left - getMovingSpeed() + "px";
         }
     }
+}
+
+function checkCollision() {
+    for (let i = 0; i < obstacles.length; i++) {
+        let obstacle = obstacles[i];
+        let gameCharacterRect = gameCharacter.getBoundingClientRect();
+        let obstacleRect = obstacle.getBoundingClientRect();
+        if (gameCharacterRect.right - 35 > obstacleRect.left && gameCharacterRect.bottom - 35 > obstacleRect.top) {
+
+            if (obstacle.classList.contains('box')) {
+                backgroundMusic(false);
+                alert('Game Over');
+                window.location.reload();
+            }
+        }
+    }
+}
+
+function backgroundMusic(play = true) {
+    document.getElementById("backgroundMusic")[play ? 'play' : 'pause']();
 }
