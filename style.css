@@ -49,5 +49,20 @@ audio{
 }
 
 .ganja {
+    position: absolute;
     height: 150px;
+    right: 250px;
+
+}
+
+
+.apilagesaduend{
+    position: absolute;
+    height: 250px;
+    right: 850px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    
+
 }
