@@ -17,16 +17,16 @@ function createRandomObstacles() {
 
     let obstacleType = Math.random() < 0.5 ? 'box' : 'ganja';
     const clonedElement = document.getElementsByClassName(obstacleType)[0].cloneNode(true);
-    clonedElement.style.left = Math.floor(Math.random() * 100) + "%";
+    clonedElement.classList.remove('hidden');
     document.body.appendChild(clonedElement);
 }
 
 function moveObstacles() {
-    for (let i = 0; i < obstacles.length; i++) {
+    for (let i = 2; i < obstacles.length; i++) {
         let obstacle = obstacles[i];
         let left = parseInt(window.getComputedStyle(obstacle, null).left);
         if (left < -100) {
-            obstacle.style.left = "100%";
+            obstacle.remove();
         } else {
             obstacle.style.left = left - getMovingSpeed() + "px";
         }
@@ -34,8 +34,9 @@ function moveObstacles() {
 }
 
 function checkCollision() {
-    for (let i = 0; i < obstacles.length; i++) {
+    for (let i = 2; i < obstacles.length; i++) {
         let obstacle = obstacles[i];
+
         let gameCharacterRect = gameCharacter.getBoundingClientRect();
         let obstacleRect = obstacle.getBoundingClientRect();
         if (gameCharacterRect.right - 35 > obstacleRect.left && gameCharacterRect.bottom - 35 > obstacleRect.top) {
@@ -60,6 +61,7 @@ function backgroundMusic(play = true) {
 function gameOver() {
     isRunning = false;
     backgroundMusic(false);
+    gameCharacter.style.rotate = "60deg";
     gameOverImage.style.display = "block";
     overlay.classList.remove('hidden');
     gameOverMusic.play();

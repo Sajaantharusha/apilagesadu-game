@@ -2,6 +2,7 @@ var isJumping = false;
 var isRunning = false;
 var runnerInterval = null;
 var score = 0;
+var isGameOver = false;
 let scoreElement = document.getElementById('score');
 var gameCharacter = document.getElementById("apilagesadu")
 let obstacles = document.getElementsByClassName('obstacle');
@@ -12,6 +13,7 @@ let gameOverImage = document.getElementById('apilagesaduend');
 let gameOverMusic = document.getElementById('gameOverMusic');
 
 function controller(event) {
+    if (isGameOver) return;
 
     if (event.key == "Enter") {
         run();
@@ -88,9 +90,15 @@ function jump() {
 }
 
 (function () {
+    document.addEventListener("keyup", controller);
+
     gameOverImage.onclick = () => window.location.reload();
 
+    createRandomObstacles();
+
     setInterval(() => {
-        createRandomObstacles();
+        setTimeout(function () {
+            createRandomObstacles();
+        }, randomIntFromInterval(1000, 3000))
     }, 3000);
 })();

@@ -22,6 +22,7 @@ audio{
     height: 250px;
     bottom: 0;
     position: absolute;
+    transition: rotate .5s;
 }
 
 
@@ -45,7 +46,6 @@ audio{
 
 .box{
     height: 100px;
-    bottom:0;
 }
 
 .ganja {
