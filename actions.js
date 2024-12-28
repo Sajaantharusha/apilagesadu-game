@@ -12,6 +12,15 @@ function moveBackground() {
     background.style.backgroundPosition = positions.left + "px " + positions.top;
 }
 
+function createRandomObstacles() {
+    if (!isRunning) return
+
+    let obstacleType = Math.random() < 0.5 ? 'box' : 'ganja';
+    const clonedElement = document.getElementsByClassName(obstacleType)[0].cloneNode(true);
+    clonedElement.style.left = Math.floor(Math.random() * 100) + "%";
+    document.body.appendChild(clonedElement);
+}
+
 function moveObstacles() {
     for (let i = 0; i < obstacles.length; i++) {
         let obstacle = obstacles[i];
@@ -34,6 +43,12 @@ function checkCollision() {
             if (obstacle.classList.contains('box')) {
                 gameOver();
             }
+
+            if (obstacle.classList.contains('ganja')) {
+                obstacle.style.display = "none";
+                score += 1;
+                scoreElement.innerHTML = score;
+            }
         }
     }
 }
@@ -43,6 +58,7 @@ function backgroundMusic(play = true) {
 }
 
 function gameOver() {
+    isRunning = false;
     backgroundMusic(false);
     gameOverImage.style.display = "block";
     overlay.classList.remove('hidden');

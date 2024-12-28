@@ -1,6 +1,8 @@
 var isJumping = false;
 var isRunning = false;
 var runnerInterval = null;
+var score = 0;
+let scoreElement = document.getElementById('score');
 var gameCharacter = document.getElementById("apilagesadu")
 let obstacles = document.getElementsByClassName('obstacle');
 let boxes = document.getElementsByClassName('box');
@@ -87,4 +89,8 @@ function jump() {
 
 (function () {
     gameOverImage.onclick = () => window.location.reload();
+
+    setInterval(() => {
+        createRandomObstacles();
+    }, 3000);
 })();

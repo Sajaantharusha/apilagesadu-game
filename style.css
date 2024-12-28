@@ -39,8 +39,8 @@ audio{
 
 .obstacle {
     position: absolute;
-    right: -100px;
     bottom: 0;
+    left: 100%;
 }
 
 .box{
@@ -49,10 +49,7 @@ audio{
 }
 
 .ganja {
-    position: absolute;
     height: 150px;
-    right: 250px;
-
 }
 
 .apilagesaduend{
