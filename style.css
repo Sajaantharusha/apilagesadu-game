@@ -65,6 +65,8 @@ audio{
     right: 0;
     text-align: center;
     display: none;
+    right: 0;
+    z-index:99999;
 }
 
 #overlay {
