@@ -1,9 +1,13 @@
 var isJumping = false;
 var isRunning = false;
+var runnerInterval = null;
 var gameCharacter = document.getElementById("apilagesadu")
 let obstacles = document.getElementsByClassName('obstacle');
 let boxes = document.getElementsByClassName('box');
 let ganjas = document.getElementsByClassName('ganja');
+let overlay = document.getElementById('overlay');
+let gameOverImage = document.getElementById('apilagesaduend');
+let gameOverMusic = document.getElementById('gameOverMusic');
 
 function controller(event) {
 
@@ -30,7 +34,7 @@ function run() {
 
     let runImageNumber = 1;
 
-    setInterval(() => {
+    runnerInterval = setInterval(() => {
         moveBackground();
         moveObstacles();
         checkCollision();
@@ -80,3 +84,7 @@ function jump() {
         gameCharacter.src = "jump" + jumpImageNumber + ".png";
     }, 150);
 }
+
+(function () {
+    gameOverImage.onclick = () => window.location.reload();
+})();

@@ -32,9 +32,7 @@ function checkCollision() {
         if (gameCharacterRect.right - 35 > obstacleRect.left && gameCharacterRect.bottom - 35 > obstacleRect.top) {
 
             if (obstacle.classList.contains('box')) {
-                backgroundMusic(false);
-                alert('Game Over');
-                window.location.reload();
+                gameOver();
             }
         }
     }
@@ -42,4 +40,12 @@ function checkCollision() {
 
 function backgroundMusic(play = true) {
     document.getElementById("backgroundMusic")[play ? 'play' : 'pause']();
+}
+
+function gameOver() {
+    backgroundMusic(false);
+    gameOverImage.style.display = "block";
+    overlay.classList.remove('hidden');
+    gameOverMusic.play();
+    clearInterval(runnerInterval);
 }
