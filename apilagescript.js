@@ -20,9 +20,20 @@ function controller(event) {
         backgroundMusic();
     }
 
-
     if (event.key == " ") {
         jump();
+    }
+
+    if (event.type == "click") {
+
+        if (!isRunning) {
+            run();
+            backgroundMusic();
+        }
+
+        if (isRunning) {
+            jump();
+        }
     }
 }
 
@@ -34,6 +45,7 @@ function run() {
         return;
     } else {
         isRunning = true;
+        createRandomObstacles();
     }
 
     let runImageNumber = 1;
@@ -91,10 +103,9 @@ function jump() {
 
 (function () {
     document.addEventListener("keyup", controller);
+    document.addEventListener("click", controller);
 
     gameOverImage.onclick = () => window.location.reload();
-
-    createRandomObstacles();
 
     setInterval(() => {
         setTimeout(function () {
