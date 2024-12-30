@@ -105,7 +105,7 @@ function jump() {
     document.addEventListener("keyup", controller);
     document.addEventListener("click", controller);
 
-    gameOverImage.onclick = () => window.location.reload();
+    overlay.onclick = () => window.location.reload();
 
     setInterval(() => {
         setTimeout(function () {
